@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.nisecoder.aojcoder.feature_1.0.0.201301031813.jar" id="com.nisecoder.aojcoder.feature" version="1.0.0.201301031813"/>
+   <feature url="features/AojCoder_1.0.0.201301032005.jar" id="AojCoder" version="1.0.0.201301032005">
+      <category name="com.nisecoder.aojcoder"/>
+   </feature>
+   <category-def name="com.nisecoder.aojcoder" label="AojCoder"/>
 </site>
