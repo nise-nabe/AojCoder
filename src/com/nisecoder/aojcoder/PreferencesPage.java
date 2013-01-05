@@ -17,8 +17,6 @@ public class PreferencesPage extends FieldEditorPreferencePage implements
 	@Override
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(AojCoderPlugin.getDefault().getPreferenceStore());
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

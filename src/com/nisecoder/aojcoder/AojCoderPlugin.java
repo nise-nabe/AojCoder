@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class AojCoderPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "AojCoder"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.nisecoder.aojcoder"; //$NON-NLS-1$
 
 	// The shared instance
 	private static AojCoderPlugin plugin;

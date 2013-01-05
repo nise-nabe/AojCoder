@@ -50,7 +50,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-public class ProblemView extends ViewPart {
+public class AojProblemView extends ViewPart {
 
 	Table table;
 	TableViewer viewer;

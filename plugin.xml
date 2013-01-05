@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>on>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.nisecoder.aojcoder.PreferencesPage"
+            id="com.nisecoder.aojcoder.preference"
+            name="AojCoder">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="com.nisecoder.aojcoder.views"
+            class="com.nisecoder.aojcoder.AojProblemView"
+            id="com.nisecoder.aojcoder.views"
+            name="AojProblemView"
+            restorable="true">
+      </view>
+      <category
+            id="com.nisecoder.aojcoder.views"
+            name="AojCoder">
+      </category>
+   </extension>
+
+</plugin>
