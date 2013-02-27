@@ -1,5 +1,6 @@
 package com.nisecoder.aojcoder;
 
+import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -179,6 +180,27 @@ public class AojProblemView extends ViewPart {
 
 			}
 		});
+		MenuItem openItem = new MenuItem(menu, SWT.NONE);
+		openItem.setText("open page in browser");
+		openItem.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TableItem[] items = table.getSelection();
+				String id = items[0].getText();
+				try {
+					URL url = new URL("http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id="+id);
+					Desktop.getDesktop().browse(url.toURI());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				// TODO Auto-generated method stub
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
+
 		table.setMenu(menu);
 	}
 
