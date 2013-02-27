@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.nisecoder.aojcoder_1.0.0.201301051822.jar" id="com.nisecoder.aojcoder" version="1.0.0.201301051822">
+   <feature url="features/com.nisecoder.aojcoder_1.0.0.201302280045.jar" id="com.nisecoder.aojcoder" version="1.0.0.201302280045">
       <category name="com.nisecoder.aojcoder"/>
    </feature>
    <category-def name="com.nisecoder.aojcoder" label="AojCoder"/>
