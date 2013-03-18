@@ -1,7 +1,7 @@
 AojCoder
 =======
 
-# できること
+## できること
 
 * 問題のリストが見られる
 * その問題を解いたかどうかを見られる
@@ -10,7 +10,7 @@ AojCoder
 
 ![サンプル](http://cdn-ak.f.st-hatena.com/images/fotolife/n/nise_nabe/20130105/20130105184434.png)
 
-# インストール方法
+## インストール方法
 
 詳細は <http://d.hatena.ne.jp/nise_nabe/20130105/1357380302> に書いてあります．
 
