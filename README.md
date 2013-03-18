@@ -8,7 +8,7 @@ AojCoder
 * 問題に対応するプロジェクトを作れる
 * 問題リストから問題のURLを開ける
 
-[サンプル](http://cdn-ak.f.st-hatena.com/images/fotolife/n/nise_nabe/20130105/20130105184434.png)
+![サンプル](http://cdn-ak.f.st-hatena.com/images/fotolife/n/nise_nabe/20130105/20130105184434.png)
 
 # インストール方法
 
