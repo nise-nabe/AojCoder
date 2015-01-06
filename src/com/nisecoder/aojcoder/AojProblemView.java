@@ -195,6 +195,7 @@ public class AojProblemView extends ViewPart {
 				}
 				// TODO Auto-generated method stub
 			}
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
