@@ -23,5 +23,14 @@
             name="AojCoder">
       </category>
    </extension>
+   <extension
+         id="com.nisecoder.aojcoder.AojNature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="com.nisecoder.aojcoder.AojNature">
+         </run>
+      </runtime>
+   </extension>
 
 </plugin>
