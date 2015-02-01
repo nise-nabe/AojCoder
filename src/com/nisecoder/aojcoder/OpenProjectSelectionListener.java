@@ -18,6 +18,8 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Table;
@@ -29,7 +31,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
 
-public class OpenProjectSelectionListener implements SelectionListener {
+public class OpenProjectSelectionListener implements SelectionListener, MouseListener {
 	Table table;
 	
 	public void setTable(Table table) {
@@ -38,6 +40,10 @@ public class OpenProjectSelectionListener implements SelectionListener {
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
+		openProject();
+	}
+
+	private void openProject() {
 		TableItem[] items = table.getSelection();
 		String id = items[0].getText();
 		try {
@@ -117,6 +123,21 @@ public class OpenProjectSelectionListener implements SelectionListener {
 	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 
+	}
+
+	@Override
+	public void mouseDoubleClick(MouseEvent e) {
+		openProject();
+	}
+
+	@Override
+	public void mouseDown(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseUp(MouseEvent e) {
+		
 	}
 
 }
