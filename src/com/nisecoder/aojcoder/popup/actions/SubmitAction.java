@@ -28,7 +28,7 @@ public class SubmitAction implements IObjectActionDelegate {
 	private Shell shell;
 
 	/**
-	 * Constructor for Action1.
+	 * Constructor for SubmitAction
 	 */
 	public SubmitAction() {
 		super();
