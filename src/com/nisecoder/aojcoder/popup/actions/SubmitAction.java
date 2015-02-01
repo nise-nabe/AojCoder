@@ -14,11 +14,14 @@ import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+
+import com.nisecoder.aojcoder.AojCoderPlugin;
 
 public class SubmitAction implements IObjectActionDelegate {
 
@@ -42,6 +45,11 @@ public class SubmitAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
+		IPreferenceStore pref = AojCoderPlugin.getDefault()
+				.getPreferenceStore();
+		String userId = pref.getString("aojUserId");
+		String password = pref.getString("aojPassword");
+
 		try {
 			RequestConfig requestConfig = RequestConfig.custom()
 					.setSocketTimeout(3000).setConnectTimeout(3000).build();
@@ -53,8 +61,8 @@ public class SubmitAction implements IObjectActionDelegate {
 			HttpPost post = new HttpPost(
 					"http://judge.u-aizu.ac.jp/onlinejudge/servlet/Submit");
 			List<BasicNameValuePair> list = Arrays
-					.asList(new BasicNameValuePair("userID", "userid"),
-							new BasicNameValuePair("password", "password"),
+					.asList(new BasicNameValuePair("userID", userId),
+							new BasicNameValuePair("password", password),
 							new BasicNameValuePair("problemNO", "10001"),
 							new BasicNameValuePair("language", "JAVA"),
 							new BasicNameValuePair("sourceCode",
@@ -70,12 +78,14 @@ public class SubmitAction implements IObjectActionDelegate {
 
 				@Override
 				public void completed(HttpResponse response) {
-					MessageDialog.openInformation(shell, "AojCoderPlugin", "Submit was executed.");
+					MessageDialog.openInformation(shell, "AojCoderPlugin",
+							"Submit was executed.");
 				}
 
 				@Override
 				public void failed(Exception e) {
-					MessageDialog.openInformation(shell, "AojCoderPlugin", "Submit was failed.");
+					MessageDialog.openInformation(shell, "AojCoderPlugin",
+							"Submit was failed.");
 				}
 
 			});
