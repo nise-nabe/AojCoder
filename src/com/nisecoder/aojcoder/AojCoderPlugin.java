@@ -1,5 +1,8 @@
 package com.nisecoder.aojcoder;
 
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -13,16 +16,27 @@ public class AojCoderPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static AojCoderPlugin plugin;
-	
+
+	public CloseableHttpAsyncClient getHttpClient() {
+		RequestConfig requestConfig = RequestConfig.custom()
+				.setSocketTimeout(3000).setConnectTimeout(3000).build();
+		return HttpAsyncClients.custom().setDefaultRequestConfig(requestConfig)
+				.build();
+	}
+
 	/**
 	 * The constructor
 	 */
 	public AojCoderPlugin() {
+
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -31,7 +45,10 @@ public class AojCoderPlugin extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;

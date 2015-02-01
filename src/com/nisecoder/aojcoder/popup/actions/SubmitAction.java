@@ -5,17 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
@@ -50,13 +49,9 @@ public class SubmitAction implements IObjectActionDelegate {
 		String userId = pref.getString("aojUserId");
 		String password = pref.getString("aojPassword");
 
+		CloseableHttpAsyncClient httpclient;
 		try {
-			RequestConfig requestConfig = RequestConfig.custom()
-					.setSocketTimeout(3000).setConnectTimeout(3000).build();
-
-			CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom()
-					.setDefaultRequestConfig(requestConfig).build();
-
+			httpclient = AojCoderPlugin.getDefault().getHttpClient();
 			httpclient.start();
 			HttpPost post = new HttpPost(
 					"http://judge.u-aizu.ac.jp/onlinejudge/servlet/Submit");
@@ -78,14 +73,24 @@ public class SubmitAction implements IObjectActionDelegate {
 
 				@Override
 				public void completed(HttpResponse response) {
-					MessageDialog.openInformation(shell, "AojCoderPlugin",
-							"Submit was executed.");
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							MessageDialog.openInformation(shell,
+									"AojCoderPlugin", "Submit was executed.");
+						}
+					});
 				}
 
 				@Override
 				public void failed(Exception e) {
-					MessageDialog.openInformation(shell, "AojCoderPlugin",
-							"Submit was failed.");
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							MessageDialog.openInformation(shell,
+									"AojCoderPlugin", "Submit was failed.");
+						}
+					});
 				}
 
 			});
