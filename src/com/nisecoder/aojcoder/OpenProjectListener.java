@@ -31,7 +31,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
 
-public class OpenProjectSelectionListener implements SelectionListener, MouseListener {
+public class OpenProjectListener implements SelectionListener, MouseListener {
 	Table table;
 	
 	public void setTable(Table table) {

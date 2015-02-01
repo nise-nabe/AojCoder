@@ -71,7 +71,7 @@ public class AojProblemView extends ViewPart {
 		Menu menu = new Menu(parent);
 		MenuItem menuItem = new MenuItem(menu, SWT.NONE);
 		menuItem.setText("open project");
-		OpenProjectSelectionListener openProject = new OpenProjectSelectionListener();
+		OpenProjectListener openProject = new OpenProjectListener();
 		openProject.setTable(table);
 		table.addMouseListener(openProject);
 		menuItem.addSelectionListener(openProject);
