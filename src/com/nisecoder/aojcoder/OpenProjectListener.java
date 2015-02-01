@@ -33,7 +33,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 public class OpenProjectListener implements SelectionListener, MouseListener {
 	Table table;
-	
+
 	public void setTable(Table table) {
 		this.table = table;
 	}
@@ -132,12 +132,12 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 
 	@Override
 	public void mouseDown(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void mouseUp(MouseEvent e) {
-		
+
 	}
 
 }
