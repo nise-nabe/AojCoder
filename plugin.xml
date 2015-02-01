@@ -36,7 +36,7 @@
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             id="com.nisecoder.aojcoder.contribution1"
-            objectClass="org.eclipse.core.resources.IFile">
+            objectClass="org.eclipse.jdt.core.ICompilationUnit">
          <menu
                id="com.nisecoder.aojcoder.menu1"
                label="AOJ"
