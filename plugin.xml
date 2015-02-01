@@ -32,5 +32,27 @@
          </run>
       </runtime>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="com.nisecoder.aojcoder.contribution1"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="com.nisecoder.aojcoder.menu1"
+               label="AOJ"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="com.nisecoder.aojcoder.popup.actions.SubmitAction"
+               enablesFor="1"
+               id="com.nisecoder.aojcoder.newAction"
+               label="Submit"
+               menubarPath="com.nisecoder.aojcoder.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>
