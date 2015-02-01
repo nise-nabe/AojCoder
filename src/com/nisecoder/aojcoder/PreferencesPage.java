@@ -28,9 +28,10 @@ public class PreferencesPage extends FieldEditorPreferencePage implements
 		addField(userIdEditor);
 
 		// add password form
-		passwordEditor = new StringFieldEditor("aojPassword", "password", getFieldEditorParent());
-		passwordEditor.getTextControl(getFieldEditorParent()).setEchoChar((char) 0x25CF);
+		passwordEditor = new StringFieldEditor("aojPassword", "password",
+				getFieldEditorParent());
+		passwordEditor.getTextControl(getFieldEditorParent()).setEchoChar(
+				(char) 0x25CF);
 		addField(passwordEditor);
 	}
-
 }
