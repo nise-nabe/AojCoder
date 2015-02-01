@@ -92,94 +92,9 @@ public class AojProblemView extends ViewPart {
 		Menu menu = new Menu(parent);
 		MenuItem menuItem = new MenuItem(menu, SWT.NONE);
 		menuItem.setText("open project");
-		menuItem.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				TableItem[] items = table.getSelection();
-				String id = items[0].getText();
-				try {
-					IWorkspaceRoot root = ResourcesPlugin.getWorkspace()
-							.getRoot();
-					final IProject project = root
-							.getProject(createProjectName(id));
-					IFile sourceFile = project.getFile("Main.java");
-					if (project.exists()) {
-						openEditor(sourceFile);
-						return;
-					}
-					WorkspaceModifyOperation projectCreationOperation = new WorkspaceModifyOperation() {
-						@Override
-						protected void execute(IProgressMonitor monitor)
-								throws CoreException,
-								InvocationTargetException, InterruptedException {
-							project.create(null);
-							project.open(null);
-						}
-					};
-					projectCreationOperation.run(null);
-
-					addDescription(project);
-					IJavaProject javaProject = JavaCore.create(project);
-
-					addBuildpath(javaProject);
-					addCompileOption(javaProject);
-					createNewFile(sourceFile);
-					openEditor(sourceFile);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-
-			private String createProjectName(String id) {
-				return "AOJ-" + id + "-java";
-			}
-
-			private void addDescription(IProject project) throws CoreException {
-				IWorkspace workspace = ResourcesPlugin.getWorkspace();
-				IProjectDescription newProjectDescription = workspace
-						.newProjectDescription(project.getName());
-				newProjectDescription
-						.setNatureIds(new String[] { JavaCore.NATURE_ID });
-				project.setDescription(newProjectDescription, null);
-			}
-
-			private void createNewFile(IFile sourceFile) throws CoreException {
-				sourceFile.create(new ByteArrayInputStream(
-						"public class Main{\n}".getBytes()), true, null);
-			}
-
-			private void addCompileOption(IJavaProject javaProject) {
-				final String JAVA_VERSION = JavaCore.VERSION_1_6;
-				javaProject.setOption(JavaCore.COMPILER_COMPLIANCE,
-						JAVA_VERSION);
-				javaProject.setOption(JavaCore.COMPILER_SOURCE, JAVA_VERSION);
-				javaProject
-						.setOption(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM,
-								JAVA_VERSION);
-			}
-
-			private void addBuildpath(IJavaProject javaProject)
-					throws JavaModelException {
-				IClasspathEntry sourceEntry = JavaCore
-						.newSourceEntry(javaProject.getPath());
-				IClasspathEntry conEntry = JavaCore.newContainerEntry(new Path(
-						JavaRuntime.JRE_CONTAINER));
-				javaProject.setRawClasspath(new IClasspathEntry[] {
-						sourceEntry, conEntry }, null);
-			}
-
-			private void openEditor(IFile sourceFile) throws PartInitException {
-				IWorkbench workbench = PlatformUI.getWorkbench();
-				IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
-				window.getActivePage().openEditor(
-						new FileEditorInput(sourceFile), JavaUI.ID_CU_EDITOR);
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-
-			}
-		});
+		OpenProjectSelectionListener openProject = new OpenProjectSelectionListener();
+		openProject.setTable(table);
+		menuItem.addSelectionListener(openProject);
 		MenuItem openItem = new MenuItem(menu, SWT.NONE);
 		openItem.setText("open page in browser");
 		openItem.addSelectionListener(new SelectionListener() {
