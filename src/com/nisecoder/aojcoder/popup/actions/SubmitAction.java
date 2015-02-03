@@ -102,8 +102,8 @@ public class SubmitAction implements IObjectActionDelegate {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							MessageDialog.openInformation(shell,
-									"AojCoderPlugin", "Submit was failed.");
+							MessageDialog.openError(shell, "AojCoderPlugin",
+									"Submit was failed.");
 						}
 					});
 				}
