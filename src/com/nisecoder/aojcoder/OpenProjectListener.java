@@ -51,7 +51,12 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IProject project = root.getProject(createProjectName(id));
 			IFile sourceFile = project.getFile("Main.java");
+			final QualifiedName key = new QualifiedName(
+					AojCoderPlugin.PLUGIN_ID, "problemId");
 			if (project.exists()) {
+				if (project.getPersistentProperty(key) == null) {
+					project.setPersistentProperty(key, id);
+				}
 				openEditor(sourceFile);
 				return;
 			}
@@ -62,8 +67,7 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 						InterruptedException {
 					project.create(monitor);
 					project.open(monitor);
-					project.setPersistentProperty(new QualifiedName(
-							AojCoderPlugin.PLUGIN_ID, "problemId"), id);
+					project.setPersistentProperty(key, id);
 				}
 			};
 			projectCreationOperation.run(null);
