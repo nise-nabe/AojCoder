@@ -73,17 +73,18 @@ public class SubmitAction implements IObjectActionDelegate {
 					"http://judge.u-aizu.ac.jp/onlinejudge/servlet/Submit");
 			if (userId.isEmpty()) {
 				MessageDialog.openError(shell, "AojCoderPlugin",
-						"AOJ \"userId\" was not set in Preference.");
+						"Set AOJ \"userId\" in Preference.");
 				return;
 			}
 			if (password.isEmpty()) {
 				MessageDialog.openError(shell, "AojCoderPlugin",
-						"AOJ \"password\" was not set in Preference.");
+						"Set AOJ \"password\" in Preference.");
 				return;
 			}
 			if (problemId == null || problemId.isEmpty()) {
 				MessageDialog.openError(shell, "AojCoderPlugin",
-						"Please reopen this project from \"AojProblemView\"");
+								"This project is not associated with Problem.\n"
+										+ "Please reopen this project from \"AojProblemView\"");
 				return;
 			}
 			List<BasicNameValuePair> list = Arrays.asList(
