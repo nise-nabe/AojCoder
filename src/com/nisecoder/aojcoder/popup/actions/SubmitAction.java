@@ -30,7 +30,7 @@ import com.nisecoder.aojcoder.AojCoderPlugin;
 public class SubmitAction implements IObjectActionDelegate {
 
 	private Shell shell;
-	IProject project;
+	ICompilationUnit javaFile;
 
 	/**
 	 * Constructor for SubmitAction
@@ -59,19 +59,19 @@ public class SubmitAction implements IObjectActionDelegate {
 		try {
 			QualifiedName key = new QualifiedName(AojCoderPlugin.PLUGIN_ID,
 					"problemId");
-			String problemId = this.project.getPersistentProperty(key);
+			IProject project = javaFile.getJavaProject().getProject();
+			String problemId = project.getPersistentProperty(key);
 
 			httpclient = AojCoderPlugin.getDefault().getHttpClient();
 			httpclient.start();
 			HttpPost post = new HttpPost(
 					"http://judge.u-aizu.ac.jp/onlinejudge/servlet/Submit");
-			List<BasicNameValuePair> list = Arrays
-					.asList(new BasicNameValuePair("userID", userId),
-							new BasicNameValuePair("password", password),
-							new BasicNameValuePair("problemNO", problemId),
-							new BasicNameValuePair("language", "JAVA"),
-							new BasicNameValuePair("sourceCode",
-									"public class Main{}"));
+			List<BasicNameValuePair> list = Arrays.asList(
+					new BasicNameValuePair("userID", userId),
+					new BasicNameValuePair("password", password),
+					new BasicNameValuePair("problemNO", problemId),
+					new BasicNameValuePair("language", "JAVA"),
+					new BasicNameValuePair("sourceCode", javaFile.getSource()));
 			post.setEntity(new UrlEncodedFormEntity(list));
 			httpclient.execute(post, new FutureCallback<HttpResponse>() {
 
@@ -120,8 +120,7 @@ public class SubmitAction implements IObjectActionDelegate {
 		if (selection instanceof TreeSelection) {
 			Object firstElement = ((TreeSelection) selection).getFirstElement();
 			if (firstElement instanceof ICompilationUnit) {
-				ICompilationUnit unit = (ICompilationUnit) firstElement;
-				this.project = unit.getJavaProject().getProject();
+				this.javaFile = (ICompilationUnit) firstElement;
 			}
 		}
 	}
