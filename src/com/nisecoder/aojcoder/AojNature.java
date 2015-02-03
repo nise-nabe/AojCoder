@@ -6,6 +6,8 @@ import org.eclipse.core.runtime.CoreException;
 
 public class AojNature implements IProjectNature {
 	
+	static final String NATURE_ID = AojCoderPlugin.PLUGIN_ID + ".AojNature";
+
 	IProject project;
 
 	@Override

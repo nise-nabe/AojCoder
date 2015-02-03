@@ -61,9 +61,9 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 						throws CoreException, InvocationTargetException,
 						InterruptedException {
 					project.create(monitor);
+					project.open(monitor);
 					project.setPersistentProperty(new QualifiedName(
 							AojCoderPlugin.PLUGIN_ID, "problemId"), id);
-					project.open(monitor);
 				}
 			};
 			projectCreationOperation.run(null);
@@ -88,7 +88,8 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProjectDescription newProjectDescription = workspace
 				.newProjectDescription(project.getName());
-		newProjectDescription.setNatureIds(new String[] { JavaCore.NATURE_ID });
+		newProjectDescription.setNatureIds(new String[] { JavaCore.NATURE_ID,
+				AojNature.NATURE_ID });
 		project.setDescription(newProjectDescription, null);
 	}
 
