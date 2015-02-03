@@ -106,3 +106,4 @@ Export-Package: com.nisecoder.aojcoder,
  org.jsoup.parser,
  org.jsoup.safety,
  org.jsoup.select
+Bundle-Vendor: nise_nabe
