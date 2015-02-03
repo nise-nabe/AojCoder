@@ -3,10 +3,11 @@
       id="com.nisecoder.aojcoder"
       label="AojCoder"
       version="1.1.0"
-      provider-name="nise_nabe">
+      provider-name="nise_nabe"
+      plugin="com.nisecoder.aojcoder">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="https://github.com/nise-nabe/AojCoder">
+      AOJ で問題を解くのをサポートするプラグイン
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -43,11 +44,25 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </license>
 
+   <url>
+      <update url="https://nise-nabe.github.io/AojCoder/site.xml"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
    <plugin
          id="com.nisecoder.aojcoder"
          download-size="0"
          install-size="0"
-         version="1.1.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
