@@ -50,6 +50,11 @@ public class SubmitAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
+		if (!javaFile.getElementName().equals("Main.java")) {
+			MessageDialog.openWarning(shell, "AojCoderPlugin",
+					"File Name must be \"Main.java\".");
+			return;
+		}
 		IPreferenceStore pref = AojCoderPlugin.getDefault()
 				.getPreferenceStore();
 		String userId = pref.getString("aojUserId");
