@@ -10,10 +10,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
@@ -25,6 +30,7 @@ import com.nisecoder.aojcoder.AojCoderPlugin;
 public class SubmitAction implements IObjectActionDelegate {
 
 	private Shell shell;
+	IProject project;
 
 	/**
 	 * Constructor for SubmitAction
@@ -51,6 +57,10 @@ public class SubmitAction implements IObjectActionDelegate {
 
 		CloseableHttpAsyncClient httpclient;
 		try {
+			QualifiedName key = new QualifiedName(AojCoderPlugin.PLUGIN_ID,
+					"problemId");
+			String problemId = this.project.getPersistentProperty(key);
+
 			httpclient = AojCoderPlugin.getDefault().getHttpClient();
 			httpclient.start();
 			HttpPost post = new HttpPost(
@@ -58,7 +68,7 @@ public class SubmitAction implements IObjectActionDelegate {
 			List<BasicNameValuePair> list = Arrays
 					.asList(new BasicNameValuePair("userID", userId),
 							new BasicNameValuePair("password", password),
-							new BasicNameValuePair("problemNO", "10001"),
+							new BasicNameValuePair("problemNO", problemId),
 							new BasicNameValuePair("language", "JAVA"),
 							new BasicNameValuePair("sourceCode",
 									"public class Main{}"));
@@ -97,6 +107,9 @@ public class SubmitAction implements IObjectActionDelegate {
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (CoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 
@@ -104,5 +117,12 @@ public class SubmitAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
+		if (selection instanceof TreeSelection) {
+			Object firstElement = ((TreeSelection) selection).getFirstElement();
+			if (firstElement instanceof ICompilationUnit) {
+				ICompilationUnit unit = (ICompilationUnit) firstElement;
+				this.project = unit.getJavaProject().getProject();
+			}
+		}
 	}
 }
