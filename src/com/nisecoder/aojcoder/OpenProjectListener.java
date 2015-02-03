@@ -12,6 +12,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -45,7 +46,7 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 
 	private void openProject() {
 		TableItem[] items = table.getSelection();
-		String id = items[0].getText();
+		final String id = items[0].getText();
 		try {
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IProject project = root.getProject(createProjectName(id));
@@ -60,6 +61,8 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 						throws CoreException, InvocationTargetException,
 						InterruptedException {
 					project.create(monitor);
+					project.setPersistentProperty(new QualifiedName(
+							AojCoderPlugin.PLUGIN_ID, "problemId"), id);
 					project.open(monitor);
 				}
 			};
