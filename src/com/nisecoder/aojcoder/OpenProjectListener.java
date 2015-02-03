@@ -59,8 +59,8 @@ public class OpenProjectListener implements SelectionListener, MouseListener {
 				protected void execute(IProgressMonitor monitor)
 						throws CoreException, InvocationTargetException,
 						InterruptedException {
-					project.create(null);
-					project.open(null);
+					project.create(monitor);
+					project.open(monitor);
 				}
 			};
 			projectCreationOperation.run(null);
