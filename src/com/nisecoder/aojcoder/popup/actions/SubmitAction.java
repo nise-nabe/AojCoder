@@ -71,6 +71,21 @@ public class SubmitAction implements IObjectActionDelegate {
 			httpclient.start();
 			HttpPost post = new HttpPost(
 					"http://judge.u-aizu.ac.jp/onlinejudge/servlet/Submit");
+			if (userId.isEmpty()) {
+				MessageDialog.openError(shell, "AojCoderPlugin",
+						"AOJ \"userId\" was not set in Preference.");
+				return;
+			}
+			if (password.isEmpty()) {
+				MessageDialog.openError(shell, "AojCoderPlugin",
+						"AOJ \"password\" was not set in Preference.");
+				return;
+			}
+			if (problemId == null || problemId.isEmpty()) {
+				MessageDialog.openError(shell, "AojCoderPlugin",
+						"Please reopen this project from \"AojProblemView\"");
+				return;
+			}
 			List<BasicNameValuePair> list = Arrays.asList(
 					new BasicNameValuePair("userID", userId),
 					new BasicNameValuePair("password", password),
