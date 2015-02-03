@@ -6,7 +6,7 @@
       <page
             class="com.nisecoder.aojcoder.PreferencesPage"
             id="com.nisecoder.aojcoder.preference"
-            name="AojCoder">
+            name="%page.name">
       </page>
    </extension>
    <extension
@@ -15,12 +15,12 @@
             category="com.nisecoder.aojcoder.views"
             class="com.nisecoder.aojcoder.AojProblemView"
             id="com.nisecoder.aojcoder.views"
-            name="AojProblemView"
+            name="%view.name"
             restorable="true">
       </view>
       <category
             id="com.nisecoder.aojcoder.views"
-            name="AojCoder">
+            name="%category.name">
       </category>
    </extension>
    <extension
@@ -39,7 +39,7 @@
             objectClass="org.eclipse.jdt.core.ICompilationUnit">
          <menu
                id="com.nisecoder.aojcoder.menu1"
-               label="AOJ"
+               label="%menu.label"
                path="additions">
             <separator
                   name="group1">
@@ -49,7 +49,7 @@
                class="com.nisecoder.aojcoder.popup.actions.SubmitAction"
                enablesFor="1"
                id="com.nisecoder.aojcoder.newAction"
-               label="Submit"
+               label="%action.label"
                menubarPath="com.nisecoder.aojcoder.menu1/group1">
          </action>
       </objectContribution>
