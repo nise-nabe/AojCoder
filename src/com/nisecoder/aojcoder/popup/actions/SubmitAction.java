@@ -1,6 +1,8 @@
 package com.nisecoder.aojcoder.popup.actions;
 
+import java.awt.Desktop;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +21,12 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
@@ -107,8 +114,7 @@ public class SubmitAction implements IObjectActionDelegate {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							MessageDialog.openInformation(shell,
-									"AojCoderPlugin", "Submit was executed.");
+							createSuccessDialog().open();
 						}
 					});
 				}
@@ -132,6 +138,34 @@ public class SubmitAction implements IObjectActionDelegate {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	}
+
+	private Shell createSuccessDialog() {
+		final Shell s = new Shell(shell);
+		s.setText("Link Example");
+		GridLayout layout = new GridLayout();
+		layout.marginHeight = 40;
+		layout.marginWidth = 75;
+		s.setLayout(layout);
+		Link link = new Link(s, SWT.NONE);
+		link.setText("Submit was executed. <a>link</a>");
+		link.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				URL url;
+				try {
+					url = new URL(
+							"http://judge.u-aizu.ac.jp/onlinejudge/status.jsp");
+					Desktop.getDesktop().browse(url.toURI());
+					s.close();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		s.pack();
+
+		return s;
 	}
 
 	/**
