@@ -7,6 +7,7 @@ AojCoder
 * その問題を解いたかどうかを見られる
 * 問題に対応するプロジェクトを作れる
 * 問題リストから問題のURLを開ける
+* 問題の回答を提出できる
 
 ![サンプル](http://cdn-ak.f.st-hatena.com/images/fotolife/n/nise_nabe/20130105/20130105184434.png)
 
