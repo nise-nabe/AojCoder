@@ -80,12 +80,11 @@ public class AojProblemView extends ViewPart {
 				TableItem[] items = table.getSelection();
 				String id = items[0].getText();
 				try {
-					URL url = new URL("http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id="+id);
-					Desktop.getDesktop().browse(url.toURI());
+					Desktop.getDesktop().browse(
+							AojClient.getDescriptionURL(id).toURI());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				// TODO Auto-generated method stub
 			}
 
 			@Override
@@ -101,9 +100,8 @@ public class AojProblemView extends ViewPart {
 		List<String[]> list = new ArrayList<>();
 		try {
 			for (String volume : AojConstraints.volumnList) {
-				Document problemListXml = Jsoup.parse(new URL(
-						AojConstraints.apiEntryPoint + "/problem_list?volume="
-								+ volume), 30000);
+				Document problemListXml = Jsoup.parse(
+						AojClient.getProblemListURL(volume), 30000);
 				Document solvedRecordXml = Jsoup.parse(new URL(
 						AojConstraints.apiEntryPoint + "/solved_record?user_id="
 								+ userId), 30000);
