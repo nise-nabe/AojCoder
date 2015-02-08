@@ -2,7 +2,6 @@ package com.nisecoder.aojcoder.popup.actions;
 
 import java.awt.Desktop;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +31,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.nisecoder.aojcoder.AojClient;
 import com.nisecoder.aojcoder.AojCoderPlugin;
 
 public class SubmitAction implements IObjectActionDelegate {
@@ -152,11 +152,9 @@ public class SubmitAction implements IObjectActionDelegate {
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				URL url;
 				try {
-					url = new URL(
-							"http://judge.u-aizu.ac.jp/onlinejudge/status.jsp");
-					Desktop.getDesktop().browse(url.toURI());
+					Desktop.getDesktop().browse(
+							AojClient.getStaticURL().toURI());
 					s.close();
 				} catch (Exception e1) {
 					e1.printStackTrace();

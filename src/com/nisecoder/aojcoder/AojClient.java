@@ -33,4 +33,13 @@ public class AojClient {
 		return null;
 	}
 
+	public static URL getStaticURL() {
+		try {
+			return new URL("http://judge.u-aizu.ac.jp/onlinejudge/status.jsp");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 }
