@@ -25,4 +25,14 @@ public class AojClient {
 		return null;
 	}
 
+	public static URL getSolvedRecordURL(String userId) {
+		try {
+			return new URL(AojConstraints.apiEntryPoint
+					+ "/solved_record?user_id=" + userId);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

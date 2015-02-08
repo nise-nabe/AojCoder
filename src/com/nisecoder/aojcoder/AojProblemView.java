@@ -1,7 +1,6 @@
 package com.nisecoder.aojcoder;
 
 import java.awt.Desktop;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -102,9 +101,8 @@ public class AojProblemView extends ViewPart {
 			for (String volume : AojConstraints.volumeList) {
 				Document problemListXml = Jsoup.parse(
 						AojClient.getProblemListURL(volume), 30000);
-				Document solvedRecordXml = Jsoup.parse(new URL(
-						AojConstraints.apiEntryPoint + "/solved_record?user_id="
-								+ userId), 30000);
+				Document solvedRecordXml = Jsoup.parse(
+						AojClient.getSolvedRecordURL(userId), 30000);
 				Set<String> set = new HashSet<>();
 				for (Element problemId : solvedRecordXml
 						.getElementsByTag("problem_id")) {
