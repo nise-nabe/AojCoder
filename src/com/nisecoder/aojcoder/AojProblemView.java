@@ -99,7 +99,7 @@ public class AojProblemView extends ViewPart {
 	private List<String[]> getProblemList(String userId) {
 		List<String[]> list = new ArrayList<>();
 		try {
-			for (String volume : AojConstraints.volumnList) {
+			for (String volume : AojConstraints.volumeList) {
 				Document problemListXml = Jsoup.parse(
 						AojClient.getProblemListURL(volume), 30000);
 				Document solvedRecordXml = Jsoup.parse(new URL(
