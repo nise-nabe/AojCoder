@@ -32,7 +32,6 @@ public class AojProblemView extends ViewPart {
 
 	Table table;
 	TableViewer viewer;
-	String apiEntryPoint = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/";
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -101,13 +100,13 @@ public class AojProblemView extends ViewPart {
 	private List<String[]> getProblemList(String userId) {
 		List<String[]> list = new ArrayList<String[]>();
 		try {
-			for (String volume : new String[] { "100", "0", "1", "2", "3", "5",
-					"6", "10", "11", "12", "13", "15", "20", "21", "22", "23",
-					"24", "25", "26" }) {
-				Document problemListXml = Jsoup.parse(new URL(apiEntryPoint
-						+ "problem_list?volume=" + volume), 30000);
-				Document solvedRecordXml = Jsoup.parse(new URL(apiEntryPoint
-						+ "solved_record?user_id=" + userId), 30000);
+			for (String volume : AojConstraints.volumnList) {
+				Document problemListXml = Jsoup.parse(new URL(
+						AojConstraints.apiEntryPoint + "/problem_list?volume="
+								+ volume), 30000);
+				Document solvedRecordXml = Jsoup.parse(new URL(
+						AojConstraints.apiEntryPoint + "/solved_record?user_id="
+								+ userId), 30000);
 				Set<String> set = new HashSet<String>();
 				for (Element problemId : solvedRecordXml
 						.getElementsByTag("problem_id")) {
