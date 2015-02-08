@@ -6,9 +6,7 @@ import java.net.URL;
 public class AojClient {
 	public static URL getDescriptionURL(String id) {
 		try {
-			return new URL(
-					"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id="
-							+ id);
+			return new URL(AojConstraints.baseUrl + "/description.jsp?id=" + id);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
