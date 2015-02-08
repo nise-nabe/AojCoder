@@ -98,7 +98,7 @@ public class AojProblemView extends ViewPart {
 	}
 
 	private List<String[]> getProblemList(String userId) {
-		List<String[]> list = new ArrayList<String[]>();
+		List<String[]> list = new ArrayList<>();
 		try {
 			for (String volume : AojConstraints.volumnList) {
 				Document problemListXml = Jsoup.parse(new URL(
@@ -107,7 +107,7 @@ public class AojProblemView extends ViewPart {
 				Document solvedRecordXml = Jsoup.parse(new URL(
 						AojConstraints.apiEntryPoint + "/solved_record?user_id="
 								+ userId), 30000);
-				Set<String> set = new HashSet<String>();
+				Set<String> set = new HashSet<>();
 				for (Element problemId : solvedRecordXml
 						.getElementsByTag("problem_id")) {
 					set.add(problemId.text());
