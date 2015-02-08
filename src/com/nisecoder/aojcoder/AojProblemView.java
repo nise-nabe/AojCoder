@@ -80,7 +80,7 @@ public class AojProblemView extends ViewPart {
 				String id = items[0].getText();
 				try {
 					Desktop.getDesktop().browse(
-							AojClient.getDescriptionURL(id).toURI());
+							AojConstraints.getDescriptionURL(id).toURI());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -100,9 +100,9 @@ public class AojProblemView extends ViewPart {
 		try {
 			for (String volume : AojConstraints.volumeList) {
 				Document problemListXml = Jsoup.parse(
-						AojClient.getProblemListURL(volume), 30000);
+						AojConstraints.getProblemListURL(volume), 30000);
 				Document solvedRecordXml = Jsoup.parse(
-						AojClient.getSolvedRecordURL(userId), 30000);
+						AojConstraints.getSolvedRecordURL(userId), 30000);
 				Set<String> set = new HashSet<>();
 				for (Element problemId : solvedRecordXml
 						.getElementsByTag("problem_id")) {

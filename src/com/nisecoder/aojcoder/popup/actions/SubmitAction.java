@@ -31,8 +31,8 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.nisecoder.aojcoder.AojClient;
 import com.nisecoder.aojcoder.AojCoderPlugin;
+import com.nisecoder.aojcoder.AojConstraints;
 
 public class SubmitAction implements IObjectActionDelegate {
 
@@ -154,7 +154,7 @@ public class SubmitAction implements IObjectActionDelegate {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					Desktop.getDesktop().browse(
-							AojClient.getStaticURL().toURI());
+							AojConstraints.getStaticURL().toURI());
 					s.close();
 				} catch (Exception e1) {
 					e1.printStackTrace();
